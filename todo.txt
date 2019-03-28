@@ -1,0 +1,76 @@
+2/13/2010
+
+Tone Detector
+  - Order PS2 mini key
+  - The input is noisy. The tone-detector needs to be robust.
+  - Caller ID FSK decoder or can use tone detection here too?
+  - Caller ID spec
+  - May need to work AUDIO next to make this work
+
+TV
+  - Mod tile-driver to take buffer param (for use in SPIN environment). This may already be done from the
+    tile-graphics article
+  - Need COG
+
+Quad Bilateral Switch
+  - pulldown on input
+  - set unused inputs high
+  - Find top-four I/O pin to use
+  - Add control to Litelink software module
+
+Input
+  - http://www.sourcingmap.com/mini-keys-usb-ps2-laptop-notebook-numeric-keyboard-number-keypad-p-28080.html
+  - Using a keyboard interface allows for debugging with full keyboard and then
+    small input for production
+  - Need 2 I/O pins
+  - Need COG
+  - Need PS2 connector (maybe sliced extension cable)
+
+Application
+  - Crude filesystem + java tools
+  - Answering machine in SPIN
+  - Read CID handling list from file
+
+
+-- SECOND ARTICLE --
+
+Ethernet
+  - Develop/debug the driver on the demo board with keyboard/tv
+  - Seems to need 5 I/O pins
+
+Application
+  - Attendant Language
+  - Adventure game
+  - Language Manager (Spanish prompts)
+  - Web interface
+
+
+Audio
+  - Use dialtone from telco as reference.
+  - Use scope
+  - Why the clipping at 0.25V?
+  - Why the noise when the SD card is writing? Software?
+  - Playback audio needs cleaning too. A constant hum added?
+
+
+
+CrossBar **** FUTURE ****
+  - Something besides 4066 ... 250ohm I/O impedance is high
+
+
+
+----------------------------------------------------------------------------------------
+
+2/13/2010
+
+I have the integer Goerzel algorithm running in Java for Propeller simulation. I need to recalculate
+the coefficients for 8000Hz. For best results the COG will keep a 205 sample ring buffer and run the
+full sweep with every sample.
+
+First look at the input wav files and generate a table of expected frequencies at expected times. This
+will give someting to debug with. May have to tweak the COEFF table specifically for recordings made
+with the gadget.
+
+Going to double the sampling rate. The SD card is more than fast enough. That should help the noise.
+
+Need to amplify the incoming signal even more. Use a scope to figure out the magnitudes.
